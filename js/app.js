@@ -22,6 +22,9 @@ function switchView(viewName) {
 
   activeView = viewName;
 
+  // Set active view attribute on body for dynamic styling (like header nav background/colors)
+  document.body.setAttribute('data-active-view', viewName);
+
   // 1. Update navigation links active state
   navLinks.forEach(link => {
     if (link.getAttribute('data-view') === viewName) {
@@ -85,9 +88,9 @@ function handleRouting() {
  * Main Application Entrance
  */
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Show banner if not connected to live Supabase database
+  // 1. Log offline mode status to browser console instead of displaying visual banner to visitors
   if (!isConfigured) {
-    offlineBanner.style.display = 'flex';
+    console.log("Offline Mode: Displaying local mock sketchbook data. Configure Supabase in js/config.js to link your database.");
   }
 
   // 2. Initialize public gallery components

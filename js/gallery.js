@@ -64,31 +64,69 @@ export async function initGallery() {
 }
 
 /**
+ * Helper to compute stable chronological archive numbers based on date order
+ * Returns just the padded string (e.g. "021") to allow flexible formatting in layout templates
+ */
+export function getArchiveNumber(art, allList) {
+  const sorted = [...allList].sort((a, b) => new Date(a.date) - new Date(b.date));
+  const index = sorted.findIndex(a => a.id === art.id) + 1;
+  return String(index).padStart(3, '0');
+}
+
+/**
  * Render the Hero Section with the Featured Artwork
  */
 function renderHero() {
   const featured = allArtworks.find(art => art.featured) || allArtworks[0];
+  const heroSection = document.getElementById('heroSection');
   
   if (!featured) {
     if (heroSection) heroSection.style.display = 'none';
     return;
   }
 
+  if (heroSection) heroSection.style.display = '';
+
+  const heroArchiveNum = document.getElementById('heroArchiveNum');
+  const heroMedium = document.getElementById('heroMedium');
+  const heroYear = document.getElementById('heroYear');
+  const heroDate = document.getElementById('heroDate');
+  const btnHeroDetail = document.getElementById('btnHeroDetail');
+
+  if (heroArchiveNum) heroArchiveNum.textContent = getArchiveNumber(featured, allArtworks);
+  if (heroMedium) heroMedium.textContent = featured.medium.toUpperCase();
+  if (heroYear) heroYear.textContent = featured.year;
+
+  // Format date (e.g. JULY 2026)
+  if (heroDate) {
+    const dateObj = new Date(featured.date);
+    const formattedDate = dateObj.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric'
+    }).toUpperCase();
+    heroDate.textContent = formattedDate;
+  }
+
   heroTitle.textContent = featured.title;
-  heroMediumYear.textContent = `${featured.medium} · ${featured.year}`;
   
   heroImageFrame.innerHTML = `
     <img src="${featured.image_url}" alt="${featured.title}" style="opacity: 0; transition: opacity 0.8s ease;" onload="this.style.opacity=1;">
   `;
   
-  // Clicking the hero image opens its details
+  // Clicking the hero image or the explore button opens its details
   heroImageFrame.onclick = () => {
     openDetail(featured.id);
   };
+
+  if (btnHeroDetail) {
+    btnHeroDetail.onclick = () => {
+      openDetail(featured.id);
+    };
+  }
 }
 
 /**
- * Render Artworks in Masonry Grid
+ * Render Artworks in Concept B 5-column Editorial Grid
  */
 function renderGrid() {
   galleryGrid.innerHTML = '';
@@ -102,25 +140,29 @@ function renderGrid() {
     return;
   }
 
-  filteredArtworks.forEach((art) => {
+  filteredArtworks.forEach((art, index) => {
     const item = document.createElement('div');
-    item.className = 'gallery-item';
+    
+    // Assign 5-column Concept B rhythm: first of every 7 is large (2x2), others small (1x1)
+    const isLarge = index % 7 === 0;
+    item.className = `gallery-item ${isLarge ? 'layout-large' : 'layout-small'}`;
     item.setAttribute('role', 'button');
     item.setAttribute('aria-label', `View details for ${art.title}`);
     item.onclick = () => openDetail(art.id);
 
-    // Simple layout card markup without excessive borders/decorations
+    const archiveNum = `NO. ${getArchiveNumber(art, allArtworks)}`;
+
     item.innerHTML = `
       <div class="artwork-card">
-        <div class="artwork-image-wrapper">
-          <img src="${art.image_url}" alt="${art.title}" loading="lazy" style="opacity: 0; transition: opacity 0.5s ease;" onload="this.style.opacity=1;">
-        </div>
-        <div class="artwork-info">
-          <div>
-            <h3 class="artwork-card-title">${art.title}</h3>
-            <p class="artwork-card-medium">${art.medium}</p>
+        <div class="artwork-plate">
+          <span class="artwork-plate-number">${archiveNum}</span>
+          <div class="artwork-image-wrapper">
+            <img src="${art.image_url}" alt="${art.title}" loading="lazy" style="opacity: 0; transition: opacity 0.5s ease;" onload="this.style.opacity=1;">
           </div>
-          <span class="artwork-card-year">${art.year}</span>
+        </div>
+        <div class="artwork-meta-editorial">
+          <h3 class="artwork-card-title">${art.title}</h3>
+          <span class="artwork-card-medium">${art.medium}</span>
         </div>
       </div>
     `;
@@ -151,30 +193,49 @@ export function openDetail(id) {
   // Find index relative to current active sorting
   const totalCount = allArtworks.length;
   const sortedIndex = allArtworks.findIndex(a => a.id === id) + 1;
-  const indexStr = `${String(sortedIndex).padStart(2, '0')} / ${String(totalCount).padStart(2, '0')}`;
+  const indexStr = `${sortedIndex} / ${totalCount}`;
 
-  // Populate data
-  detailPositionIndex.textContent = indexStr;
-  detailImage.src = art.image_url;
-  detailImage.alt = art.title;
-  modalArtworkTitle.textContent = art.title;
-  detailMedium.textContent = art.medium;
-  detailCategory.textContent = art.category;
-  detailYear.textContent = art.year;
+  // Populate data safely, preventing console errors if elements are missing from HTML template
+  if (detailPositionIndex) {
+    detailPositionIndex.textContent = indexStr;
+  }
   
-  // Format creation date beautifully
-  const dateObj = new Date(art.date);
-  const formattedDate = dateObj.toLocaleDateString('en-US', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
-  });
-  detailDate.textContent = formattedDate;
+  const detailPlateNumber = document.getElementById('detailPlateNumber');
+  if (detailPlateNumber) {
+    detailPlateNumber.textContent = `NO. ${getArchiveNumber(art, allArtworks)}`;
+  }
+
+  if (detailImage) {
+    detailImage.src = art.image_url;
+    detailImage.alt = art.title;
+  }
+  if (modalArtworkTitle) {
+    modalArtworkTitle.textContent = art.title;
+  }
+  if (detailMedium) {
+    detailMedium.textContent = art.medium.toUpperCase();
+  }
+  if (detailYear) {
+    detailYear.textContent = art.year;
+  }
   
-  detailDescription.textContent = art.description || 'No notes written for this study.';
+  if (detailDate) {
+    const dateObj = new Date(art.date);
+    const formattedDate = dateObj.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric'
+    }).toUpperCase();
+    detailDate.textContent = formattedDate;
+  }
+  
+  if (detailDescription) {
+    detailDescription.textContent = art.description || 'No notes written for this study.';
+  }
 
   // Show overlay and prevent main body scrolling
-  detailOverlay.classList.add('active');
+  if (detailOverlay) {
+    detailOverlay.classList.add('active');
+  }
   document.body.style.overflow = 'hidden';
 
   // Update hash route so url represents deep link
@@ -185,13 +246,19 @@ export function openDetail(id) {
  * Close detail view
  */
 export function closeDetail() {
-  detailOverlay.classList.remove('active');
+  if (detailOverlay) {
+    detailOverlay.classList.remove('active');
+  }
   document.body.style.overflow = '';
   
   // Reset zoom state
-  detailImageSection.classList.remove('zoomed');
-  detailImage.style.transform = '';
-  detailImage.style.transformOrigin = '';
+  if (detailImageSection) {
+    detailImageSection.classList.remove('zoomed');
+  }
+  if (detailImage) {
+    detailImage.style.transform = '';
+    detailImage.style.transformOrigin = '';
+  }
 
   // Return hash to collection or sketchbook, whichever was active before
   const prevView = window.location.hash.includes('sketchbook') ? 'sketchbook' : 'collection';

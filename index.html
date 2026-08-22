@@ -56,39 +56,53 @@
     <!-- VIEW: COLLECTION (Default / Homepage) -->
     <section id="view-collection" class="view-section active">
       
-      <!-- HERO: Featured Artwork -->
+      <!-- HERO: Featured Artwork (Concept B Layout) -->
       <div id="heroSection" class="hero-view">
-        <div class="container hero-content">
-          <div class="hero-image-frame" id="heroImageFrame">
-            <!-- Rendered Dynamically -->
+        <div class="container hero-layout-container">
+          <div class="hero-split-body">
+            <div class="hero-text-col">
+              <div class="hero-archive-tag">ARCHIVE</div>
+              <div id="heroArchiveNum" class="hero-archive-number">021</div>
+              <hr class="hero-divider">
+              <div id="heroDate" class="hero-date">JULY 2026</div>
+              <h1 id="heroTitle" class="hero-title">Hand Study</h1>
+              <div class="hero-meta-details">
+                <div id="heroMedium" class="hero-medium">GRAPHITE ON PAPER</div>
+                <div id="heroYear" class="hero-year">2026</div>
+              </div>
+              <a href="javascript:void(0)" id="btnHeroDetail" class="btn-hero-explore">VIEW DETAILS &rarr;</a>
+            </div>
+            
+            <div class="hero-image-col">
+              <div class="hero-image-frame" id="heroImageFrame">
+                <!-- Rendered Dynamically -->
+              </div>
+            </div>
           </div>
-          <div class="hero-metadata">
-            <span class="eyebrow">Featured Work</span>
-            <h1 class="hero-title" id="heroTitle">...</h1>
-            <p class="hero-desc" id="heroMediumYear">...</p>
+          
+          <div class="hero-scroll-indicator">
+            <span class="scroll-arrow">&darr;</span>
+            <span class="scroll-text">SCROLL</span>
           </div>
-          <div class="scroll-indicator" aria-hidden="true">↓</div>
         </div>
       </div>
-      
-      <!-- THE GALLERY LISTING -->
-      <div class="container" style="padding-top: 5rem;">
-        <div class="collection-intro">
-          <span class="eyebrow">Browse Archive</span>
-          <h2>The Collection</h2>
-          <p class="text-muted">A personal archive of pencil drawings, watercolor studies, academic experiments, and notes.</p>
+
+      <!-- THE COLLECTION SECTION -->
+      <div class="container gallery-container-block">
+        <div class="collection-header-row">
+          <h2 class="collection-title-v2">THE COLLECTION</h2>
+          
+          <!-- Categories Filters -->
+          <nav class="category-filters" aria-label="Filter collection by category">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="pencil">DRAWING</button>
+            <button class="filter-btn" data-filter="painting">PAINTING</button>
+            <button class="filter-btn" data-filter="studies">STUDY</button>
+            <button class="filter-btn" data-filter="experiments">EXPERIMENT</button>
+          </nav>
         </div>
         
-        <!-- Categories Filters -->
-        <nav class="category-filters" aria-label="Filter collection by category">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="pencil">Pencil</button>
-          <button class="filter-btn" data-filter="painting">Painting</button>
-          <button class="filter-btn" data-filter="studies">Studies</button>
-          <button class="filter-btn" data-filter="experiments">Experiments</button>
-        </nav>
-        
-        <!-- Masonry Grid -->
+        <!-- Editorial Grid Layout -->
         <div class="gallery-grid" id="galleryGrid" aria-live="polite">
           <!-- Rendered Dynamically -->
         </div>
@@ -97,42 +111,37 @@
 
     <!-- VIEW: SKETCHBOOK (Timeline) -->
     <section id="view-sketchbook" class="view-section">
-      <div class="container">
-        <div class="collection-intro" style="margin-bottom: 5rem;">
-          <span class="eyebrow">Chronology</span>
-          <h2>The Sketchbook</h2>
-          <p class="text-muted">A timeline tracing progress, showing sketches and thoughts sorted by date of creation.</p>
+      <div class="container sketchbook-layout-v2">
+        <!-- Sticky Left Chronology Column -->
+        <div class="sketchbook-sidebar">
+          <h2 class="sketchbook-title-v2">THE SKETCHBOOK</h2>
+          <div class="chronology-nav" id="chronologyNav">
+            <!-- Rendered Dynamically in sketchbook.js -->
+          </div>
         </div>
         
-        <!-- Timeline timeline -->
-        <div class="sketchbook-timeline" id="sketchbookTimeline">
-          <!-- Rendered Dynamically -->
+        <!-- Right Content Column -->
+        <div class="sketchbook-timeline-v2" id="sketchbookTimeline">
+          <!-- Rendered Dynamically in sketchbook.js -->
         </div>
       </div>
     </section>
 
     <!-- VIEW: ABOUT -->
     <section id="view-about" class="view-section">
-      <div class="container">
-        <div class="about-grid">
-          <div class="about-text-container">
-            <span class="eyebrow" style="margin-bottom: 1.5rem; display: block;">About the Artist</span>
-            <div class="about-text">
-              <p>I'm <em>Chinmay</em>.</p>
-              <br>
-              <p>I spend most of my time building things with code, sitting in front of screens, and navigating logical frameworks.</p>
-              <br>
-              <p>But sometimes, I put the keyboard away, step back into the physical world, and pick up a pencil or watercolor brush.</p>
-              <br>
-              <p>This digital sketchbook is a quiet room built to archive these charcoal studies, pencil drafts, and painting experiments over the years.</p>
-            </div>
-            <div class="about-signature">
-              Chinmay &mdash; August 2026
-            </div>
-          </div>
-          <div class="about-image-frame">
-            <!-- A nice moody desk drawing profile photo or simple clean outline artwork -->
-            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Artist table with watercolor paints, graphite pencils and sketchbooks.">
+      <div class="container about-layout-v2">
+        <div class="about-statement-col">
+          <h2 class="about-quote-title">
+            I BUILD WITH CODE.<br>
+            I DRAW WITH GRAPHITE.<br>
+            SOMETIMES<br>
+            I DO BOTH.
+          </h2>
+          <div class="about-signature-v2">&mdash; Chinmay</div>
+        </div>
+        <div class="about-image-col">
+          <div class="about-image-frame-v2">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Studio workspace with drawing tools and sketchbooks.">
           </div>
         </div>
       </div>
@@ -140,48 +149,41 @@
 
   </main>
 
-  <!-- 3. IMMERSIVE DETAIL OVERLAY -->
+  <!-- site-footer -->
+  <footer class="site-footer">
+    <div class="container footer-layout-v2">
+      <div class="footer-copy-v2">&copy; 2026 CHINMAY BHAT</div>
+      <div class="footer-links-v2">
+        <a href="https://github.com" target="_blank" rel="noopener">GITHUB</a>
+        <a href="#" target="_blank" rel="noopener">PORTFOLIO</a>
+        <a href="#" target="_blank" rel="noopener">INSTAGRAM</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 4. IMMERSIVE DETAIL OVERLAY -->
   <div id="detailOverlay" class="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="modalArtworkTitle">
     <div class="detail-header">
       <div class="container">
         <button class="btn-back" id="btnCloseDetail" aria-label="Close detail view">
-          <span>&larr;</span> Back to collection
+          <span>&larr;</span> Back
         </button>
-        <div class="detail-position" id="detailPositionIndex">00 / 00</div>
       </div>
     </div>
     
-    <div class="container">
-      <div class="detail-content">
-        <div class="detail-image-section" id="detailImageSection" title="Click to zoom in or out">
-          <!-- Rendered Dynamically -->
-          <img id="detailImage" src="" alt="">
+    <div class="container detail-immersive-container">
+      <div class="detail-image-section" id="detailImageSection">
+        <img id="detailImage" src="" alt="">
+      </div>
+      
+      <div class="detail-editorial-info">
+        <h2 class="detail-title" id="modalArtworkTitle">Artwork Title</h2>
+        <div class="detail-meta-horizontal">
+          <span id="detailMedium">...</span>
+          <span class="separator">/</span>
+          <span id="detailYear">...</span>
         </div>
-        
-        <div class="detail-info-section">
-          <h2 class="detail-title" id="modalArtworkTitle">Artwork Title</h2>
-          
-          <div class="detail-meta-list">
-            <div class="detail-meta-item">
-              <span class="detail-meta-label">Medium</span>
-              <span class="detail-meta-val" id="detailMedium">Graphite on paper</span>
-            </div>
-            <div class="detail-meta-item">
-              <span class="detail-meta-label">Category</span>
-              <span class="detail-meta-val" id="detailCategory" style="text-transform: capitalize;">Pencil</span>
-            </div>
-            <div class="detail-meta-item">
-              <span class="detail-meta-label">Year</span>
-              <span class="detail-meta-val" id="detailYear">2026</span>
-            </div>
-            <div class="detail-meta-item">
-              <span class="detail-meta-label">Date</span>
-              <span class="detail-meta-val" id="detailDate">03/18/2026</span>
-            </div>
-          </div>
-          
-          <p class="detail-desc" id="detailDescription">Description text goes here.</p>
-        </div>
+        <p class="detail-desc" id="detailDescription"></p>
       </div>
     </div>
   </div>

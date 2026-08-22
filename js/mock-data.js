@@ -9,7 +9,7 @@ export const mockArtworks = [
     year: "2026",
     date: "2026-03-18",
     description: "A study exploring light, shadow, and soft transitions of form on paper. The focus was on capture of subtle expressions and physical contours using a 2B graphite pencil.",
-    image_url: "https://images.unsplash.com/photo-1579783928621-7a13d66a6211?auto=format&fit=crop&q=80&w=800",
+    image_url: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&q=80&w=800",
     featured: true,
     created_at: "2026-03-18T10:00:00Z"
   },
@@ -21,7 +21,7 @@ export const mockArtworks = [
     year: "2026",
     date: "2026-02-21",
     description: "An experiment in layering thin watercolor washes with opaque gouache highlights. Capturing the hazy atmosphere and quick light shifts during twilight.",
-    image_url: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&q=80&w=800",
+    image_url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800",
     featured: false,
     created_at: "2026-02-21T16:30:00Z"
   },
@@ -33,7 +33,7 @@ export const mockArtworks = [
     year: "2026",
     date: "2026-03-09",
     description: "Focusing on the complex structure and proportion of hands. Utilizing toned paper to let white chalk marks establish bright highlights directly.",
-    image_url: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=800",
+    image_url: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800",
     featured: false,
     created_at: "2026-03-09T11:15:00Z"
   },
@@ -69,7 +69,7 @@ export const mockArtworks = [
     year: "2025",
     date: "2025-10-05",
     description: "A landscape study utilizing dynamic sumi ink washes and brush speeds. Exploring emptiness and soft graphite contours as elements of atmosphere.",
-    image_url: "https://images.unsplash.com/photo-1549887534-1541e9326642?auto=format&fit=crop&q=80&w=800",
+    image_url: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=800",
     featured: false,
     created_at: "2025-10-05T08:20:00Z"
   },
@@ -81,7 +81,7 @@ export const mockArtworks = [
     year: "2026",
     date: "2026-02-05",
     description: "A fast, expressive self-portrait drawn in front of a mirror under single light source conditions. Strong contrast and visible strokes.",
-    image_url: "https://images.unsplash.com/photo-1576016770956-debb63d900ad?auto=format&fit=crop&q=80&w=800",
+    image_url: "https://images.unsplash.com/photo-1452857297128-d9c29adba80b?auto=format&fit=crop&q=80&w=800",
     featured: false,
     created_at: "2026-02-05T18:00:00Z"
   }

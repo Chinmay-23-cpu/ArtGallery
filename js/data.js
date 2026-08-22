@@ -7,10 +7,33 @@ const LOCAL_STORAGE_KEY = 'sketchbook_artworks';
 // Initialize localStorage if it's empty
 function getLocalArtworks() {
   const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
-  if (!localData) {
+  
+  let needsReset = !localData;
+  if (localData) {
+    try {
+      const parsed = JSON.parse(localData);
+      const deadUrls = [
+        'photo-1579783928621-7a13d66a6211',
+        'photo-1549887534-1541e9326642',
+        'photo-1576016770956-debb63d900ad'
+      ];
+      // Check if any artwork has a dead URL or if number of items is different
+      const hasDeadUrl = parsed.some(art => 
+        deadUrls.some(deadId => art.image_url.includes(deadId))
+      );
+      if (hasDeadUrl || parsed.length !== mockArtworks.length) {
+        needsReset = true;
+      }
+    } catch (e) {
+      needsReset = true;
+    }
+  }
+
+  if (needsReset) {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mockArtworks));
     return mockArtworks;
   }
+  
   try {
     return JSON.parse(localData);
   } catch (e) {
