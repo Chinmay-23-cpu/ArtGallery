@@ -33,7 +33,7 @@ export async function signIn(email, password) {
       email,
       password
     });
-    
+
     if (error) throw error;
     return data.user;
   } else {
@@ -56,7 +56,7 @@ export async function signOut() {
     const { error } = await supabase.auth.signOut();
     if (error) console.error("Error signing out from Supabase:", error);
   }
-  
+
   sessionStorage.removeItem('sketchbook_mock_auth');
 }
 

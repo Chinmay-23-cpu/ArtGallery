@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login — My Sketchbook</title>
   <meta name="description" content="Secure login for Chinmay's Sketchbook CMS.">
-  
+
   <!-- Typography Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Supabase JS Client Library CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body style="min-height: 100vh; display: flex; flex-direction: column;">
 
   <!-- Main Container -->
@@ -26,29 +30,33 @@
         <span class="eyebrow">Private Area</span>
         <h1 style="font-family: var(--font-serif); font-size: 2.25rem; margin-top: 0.5rem;">Sketchbook Access</h1>
       </div>
-      
+
       <!-- Error Message Box -->
-      <div id="errorAlert" style="display: none; background-color: rgba(176,92,92,0.1); border-left: 2px solid var(--color-error); padding: 0.75rem 1rem; font-size: 0.8rem; color: var(--color-error); line-height: 1.4;">
+      <div id="errorAlert"
+        style="display: none; background-color: rgba(176,92,92,0.1); border-left: 2px solid var(--color-error); padding: 0.75rem 1rem; font-size: 0.8rem; color: var(--color-error); line-height: 1.4;">
         Invalid email or password.
       </div>
-      
+
       <!-- Login Form -->
       <form id="loginForm">
         <div class="form-group">
           <label for="email" class="form-label">Owner Email</label>
-          <input type="email" id="email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+          <input type="email" id="email" class="form-control" placeholder="name@example.com" required
+            autocomplete="email">
         </div>
-        
+
         <div class="form-group" style="margin-bottom: 2rem;">
           <label for="password" class="form-label">Password</label>
-          <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          <input type="password" id="password" class="form-control" placeholder="••••••••" required
+            autocomplete="current-password">
         </div>
-        
+
         <button type="submit" class="btn-primary" style="width: 100%;" id="btnLoginSubmit">Sign In</button>
       </form>
-      
+
       <div style="text-align: center; font-size: 0.8rem;">
-        <a href="index.html" class="text-muted" style="border-bottom: 1px solid var(--color-border); padding-bottom: 2px;">
+        <a href="index.html" class="text-muted"
+          style="border-bottom: 1px solid var(--color-border); padding-bottom: 2px;">
           &larr; Back to Public Gallery
         </a>
       </div>
@@ -72,7 +80,7 @@
 
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       // Update UI loading state
       btnLoginSubmit.textContent = 'Authenticating...';
       btnLoginSubmit.disabled = true;
@@ -89,7 +97,7 @@
         console.error("Login failed:", err);
         errorAlert.textContent = err.message || "Authentication failed. Please verify credentials.";
         errorAlert.style.display = 'block';
-        
+
         // Reset UI submit button
         btnLoginSubmit.textContent = 'Sign In';
         btnLoginSubmit.disabled = false;
@@ -98,4 +106,5 @@
   </script>
 
 </body>
+
 </html>

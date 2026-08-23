@@ -53,7 +53,7 @@ function showToast(message, type = 'success') {
   toastMessage.textContent = message;
   toastMessage.className = `toast ${type}`;
   toastMessage.style.display = 'block';
-  
+
   setTimeout(() => {
     toastMessage.style.display = 'none';
   }, 4000);
@@ -64,6 +64,9 @@ function showToast(message, type = 'success') {
  */
 function formatDateForInput(dateString) {
   if (!dateString) return new Date().toISOString().split('T')[0];
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+    return dateString;
+  }
   try {
     const d = new Date(dateString);
     return d.toISOString().split('T')[0];
@@ -91,7 +94,7 @@ async function loadArtworksList() {
  */
 function renderTable() {
   adminArtworksList.innerHTML = '';
-  
+
   if (artworks.length === 0) {
     adminArtworksList.innerHTML = `
       <div style="text-align: center; padding: 4rem 0; color: var(--color-text-muted); font-family: var(--font-serif); font-size: 1.25rem;">
@@ -104,12 +107,13 @@ function renderTable() {
   artworks.forEach(art => {
     const row = document.createElement('div');
     row.className = 'admin-row';
-    
+
     // Format creation date for table row
     const formattedDate = new Date(art.date).toLocaleDateString('en-US', {
       month: '2-digit',
       day: '2-digit',
-      year: 'numeric'
+      year: 'numeric',
+      timeZone: 'UTC'
     });
 
     row.innerHTML = `
@@ -147,26 +151,26 @@ function renderTable() {
 function openAddModal() {
   activeArtworkId = null;
   artworkForm.reset();
-  
+
   // Clear file uploads & previews
   artworkIdInput.value = '';
   artExistingImageUrl.value = '';
   imagePreviewContainer.innerHTML = '<span style="color: var(--color-text-muted); font-size: 0.8rem;">No file selected (or URL placeholder active)</span>';
-  
+
   // Default values
   artYearInput.value = new Date().getFullYear();
   artDateInput.value = new Date().toISOString().split('T')[0];
-  
+
   modalHeaderTitle.textContent = "Add Artwork";
   btnFormSubmit.textContent = "Save Artwork";
-  
+
   artworkModal.classList.add('active');
 }
 
 function openEditModal(artwork) {
   activeArtworkId = artwork.id;
   artworkForm.reset();
-  
+
   artworkIdInput.value = artwork.id;
   artTitleInput.value = artwork.title;
   artCategoryInput.value = artwork.category;
@@ -184,7 +188,7 @@ function openEditModal(artwork) {
 
   modalHeaderTitle.textContent = "Edit Artwork";
   btnFormSubmit.textContent = "Save Changes";
-  
+
   artworkModal.classList.add('active');
 }
 
@@ -223,7 +227,7 @@ artImageInput.addEventListener('change', (e) => {
  */
 artworkForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
+
   btnFormSubmit.disabled = true;
   btnFormSubmit.textContent = "Processing...";
 
@@ -235,10 +239,15 @@ artworkForm.addEventListener('submit', async (e) => {
     if (file) {
       finalImageUrl = await uploadImage(file);
     }
-    
+
     // Fallback error check
     if (!finalImageUrl) {
-      throw new Error("Artwork image is required. Please choose a drawing image file.");
+      if (!isConfigured) {
+        // Default placeholder for offline mode if no file was uploaded
+        finalImageUrl = "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&q=80&w=800";
+      } else {
+        throw new Error("Artwork image is required. Please choose a drawing image file.");
+      }
     }
 
     const artworkData = {
@@ -289,7 +298,7 @@ function closeDeleteModal() {
 
 btnDeleteConfirm.addEventListener('click', async () => {
   if (!deleteArtworkId) return;
-  
+
   btnDeleteConfirm.disabled = true;
   btnDeleteConfirm.textContent = "Deleting...";
 

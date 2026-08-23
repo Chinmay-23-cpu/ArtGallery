@@ -74,7 +74,7 @@ function handleRouting() {
       document.body.style.overflow = '';
     }
 
-    if (hash === '#/sketchbook') {
+    if (hash === '#/sketchbook' || hash.startsWith('#month-')) {
       switchView('sketchbook');
     } else if (hash === '#/about') {
       switchView('about');

@@ -33,8 +33,8 @@ export async function initSketchbook() {
   
   sortedArtworks.forEach(art => {
     const dateObj = new Date(art.date);
-    const year = dateObj.getFullYear();
-    const monthName = dateObj.toLocaleString('en-US', { month: 'long' });
+    const year = dateObj.getUTCFullYear();
+    const monthName = dateObj.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
     
     if (!groupedData[year]) {
       groupedData[year] = {};
@@ -105,7 +105,8 @@ export async function initSketchbook() {
         const dateObj = new Date(art.date);
         const formattedDate = dateObj.toLocaleDateString('en-US', {
           month: 'long',
-          year: 'numeric'
+          year: 'numeric',
+          timeZone: 'UTC'
         });
 
         const archiveNum = `NO. ${getArchiveNumber(art, artworks)}`;

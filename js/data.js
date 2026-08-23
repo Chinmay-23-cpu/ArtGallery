@@ -7,7 +7,7 @@ const LOCAL_STORAGE_KEY = 'sketchbook_artworks';
 // Initialize localStorage if it's empty
 function getLocalArtworks() {
   const localData = localStorage.getItem(LOCAL_STORAGE_KEY);
-  
+
   let needsReset = !localData;
   if (localData) {
     try {
@@ -17,11 +17,12 @@ function getLocalArtworks() {
         'photo-1549887534-1541e9326642',
         'photo-1576016770956-debb63d900ad'
       ];
-      // Check if any artwork has a dead URL or if number of items is different
-      const hasDeadUrl = parsed.some(art => 
+      // Check if any artwork has a dead URL, if number of items is different, or if old titles exist
+      const hasDeadUrl = parsed.some(art =>
         deadUrls.some(deadId => art.image_url.includes(deadId))
       );
-      if (hasDeadUrl || parsed.length !== mockArtworks.length) {
+      const hasOldTitle = parsed.some(art => art.title === 'Portrait Study No. 03');
+      if (hasDeadUrl || hasOldTitle || parsed.length !== mockArtworks.length) {
         needsReset = true;
       }
     } catch (e) {
@@ -33,7 +34,7 @@ function getLocalArtworks() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(mockArtworks));
     return mockArtworks;
   }
-  
+
   try {
     return JSON.parse(localData);
   } catch (e) {
@@ -57,7 +58,7 @@ export async function getArtworks() {
         .from('artworks')
         .select('*')
         .order('date', { ascending: false });
-      
+
       if (error) throw error;
       return data;
     } catch (err) {
@@ -82,7 +83,7 @@ export async function getArtworkById(id) {
         .select('*')
         .eq('id', id)
         .single();
-      
+
       if (error) throw error;
       return data;
     } catch (err) {
@@ -175,7 +176,7 @@ function createLocalArtwork(artworkData) {
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
   };
-  
+
   localList.push(newArtwork);
   saveLocalArtworks(localList);
   return newArtwork;
@@ -212,13 +213,13 @@ function updateLocalArtwork(id, updatedFields) {
   const localList = getLocalArtworks();
   const index = localList.findIndex(art => art.id === id);
   if (index === -1) throw new Error("Artwork not found locally.");
-  
+
   const updatedArtwork = {
     ...localList[index],
     ...updatedFields,
     updated_at: new Date().toISOString()
   };
-  
+
   localList[index] = updatedArtwork;
   saveLocalArtworks(localList);
   return updatedArtwork;

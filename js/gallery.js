@@ -52,9 +52,16 @@ export async function initGallery() {
   // 4. Set up Detail overlay closing
   btnCloseDetail.addEventListener('click', closeDetail);
   
+  // Close details on clicking the background (outside the content card)
+  detailOverlay.addEventListener('click', (e) => {
+    if (e.target === detailOverlay || e.target.classList.contains('detail-immersive-container')) {
+      closeDetail();
+    }
+  });
+  
   // Close details on ESC key
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && detailOverlay.classList.contains('active')) {
+    if (e.key === 'Escape' && detailOverlay && detailOverlay.classList.contains('active')) {
       closeDetail();
     }
   });
@@ -102,7 +109,8 @@ function renderHero() {
     const dateObj = new Date(featured.date);
     const formattedDate = dateObj.toLocaleDateString('en-US', {
       month: 'long',
-      year: 'numeric'
+      year: 'numeric',
+      timeZone: 'UTC'
     }).toUpperCase();
     heroDate.textContent = formattedDate;
   }
@@ -223,7 +231,8 @@ export function openDetail(id) {
     const dateObj = new Date(art.date);
     const formattedDate = dateObj.toLocaleDateString('en-US', {
       month: 'long',
-      year: 'numeric'
+      year: 'numeric',
+      timeZone: 'UTC'
     }).toUpperCase();
     detailDate.textContent = formattedDate;
   }

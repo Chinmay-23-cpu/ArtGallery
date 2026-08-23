@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Sketchbook — Chinmay</title>
-  <meta name="description" content="A personal digital sketchbook and art gallery showcasing sketches, paintings, studies, and creative experiments.">
-  
+  <meta name="description"
+    content="A personal digital sketchbook and art gallery showcasing sketches, paintings, studies, and creative experiments.">
+
   <!-- Typography Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
-  
+
   <!-- Supabase JS Client Library CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
 
   <!-- 1. NAVIGATION HEADER -->
   <header class="site-header">
     <div class="container">
       <a href="#/collection" class="logo">Chinmay's Sketchbook</a>
-      
+
       <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" id="mobileNavToggle">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      
+
       <nav class="main-nav" id="mainNav">
         <a href="#/collection" class="nav-link active" data-view="collection">Collection</a>
         <a href="#/sketchbook" class="nav-link" data-view="sketchbook">Sketchbook</a>
@@ -42,7 +47,8 @@
   <div class="container">
     <div id="offlineBanner" class="offline-banner" style="display: none;">
       <div>
-        <strong>Offline Mode:</strong> Displaying local mock sketchbook data. Configure Supabase in <code>js/config.js</code> to link your database.
+        <strong>Offline Mode:</strong> Displaying local mock sketchbook data. Configure Supabase in
+        <code>js/config.js</code> to link your database.
       </div>
       <div>
         <a href="admin.html" class="btn-primary" style="padding: 0.4rem 1rem; font-size: 0.7rem;">Owner Login</a>
@@ -52,10 +58,10 @@
 
   <!-- 2. CONTENT VIEWS -->
   <main>
-    
+
     <!-- VIEW: COLLECTION (Default / Homepage) -->
     <section id="view-collection" class="view-section active">
-      
+
       <!-- HERO: Featured Artwork (Concept B Layout) -->
       <div id="heroSection" class="hero-view">
         <div class="container hero-layout-container">
@@ -72,14 +78,14 @@
               </div>
               <a href="javascript:void(0)" id="btnHeroDetail" class="btn-hero-explore">VIEW DETAILS &rarr;</a>
             </div>
-            
+
             <div class="hero-image-col">
               <div class="hero-image-frame" id="heroImageFrame">
                 <!-- Rendered Dynamically -->
               </div>
             </div>
           </div>
-          
+
           <div class="hero-scroll-indicator">
             <span class="scroll-arrow">&darr;</span>
             <span class="scroll-text">SCROLL</span>
@@ -91,7 +97,7 @@
       <div class="container gallery-container-block">
         <div class="collection-header-row">
           <h2 class="collection-title-v2">THE COLLECTION</h2>
-          
+
           <!-- Categories Filters -->
           <nav class="category-filters" aria-label="Filter collection by category">
             <button class="filter-btn active" data-filter="all">ALL</button>
@@ -101,7 +107,7 @@
             <button class="filter-btn" data-filter="experiments">EXPERIMENT</button>
           </nav>
         </div>
-        
+
         <!-- Editorial Grid Layout -->
         <div class="gallery-grid" id="galleryGrid" aria-live="polite">
           <!-- Rendered Dynamically -->
@@ -119,7 +125,7 @@
             <!-- Rendered Dynamically in sketchbook.js -->
           </div>
         </div>
-        
+
         <!-- Right Content Column -->
         <div class="sketchbook-timeline-v2" id="sketchbookTimeline">
           <!-- Rendered Dynamically in sketchbook.js -->
@@ -141,7 +147,8 @@
         </div>
         <div class="about-image-col">
           <div class="about-image-frame-v2">
-            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800" alt="Studio workspace with drawing tools and sketchbooks.">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800"
+              alt="Studio workspace with drawing tools and sketchbooks.">
           </div>
         </div>
       </div>
@@ -170,12 +177,12 @@
         </button>
       </div>
     </div>
-    
+
     <div class="container detail-immersive-container">
       <div class="detail-image-section" id="detailImageSection">
         <img id="detailImage" src="" alt="">
       </div>
-      
+
       <div class="detail-editorial-info">
         <h2 class="detail-title" id="modalArtworkTitle">Artwork Title</h2>
         <div class="detail-meta-horizontal">
@@ -191,4 +198,5 @@
   <!-- Main App Script -->
   <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

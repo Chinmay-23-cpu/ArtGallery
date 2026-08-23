@@ -3,12 +3,12 @@
 export const mockArtworks = [
   {
     id: "1",
-    title: "Portrait Study No. 03",
-    category: "pencil",
-    medium: "Graphite on paper",
+    title: "Floral Still Life Study",
+    category: "studies",
+    medium: "Colored pencil and graphite on paper",
     year: "2026",
     date: "2026-03-18",
-    description: "A study exploring light, shadow, and soft transitions of form on paper. The focus was on capture of subtle expressions and physical contours using a 2B graphite pencil.",
+    description: "A detailed botanical study focusing on the form, layers, and composition of flowers in a vase, drawn using soft graphite pencils and colored pencils.",
     image_url: "https://images.unsplash.com/photo-1579783901586-d88db74b4fe4?auto=format&fit=crop&q=80&w=800",
     featured: true,
     created_at: "2026-03-18T10:00:00Z"
@@ -75,12 +75,12 @@ export const mockArtworks = [
   },
   {
     id: "7",
-    title: "Self-portrait in Charcoal",
+    title: "Animal Study: The Hare",
     category: "pencil",
-    medium: "Charcoal on paper",
+    medium: "Graphite and charcoal in sketchbook",
     year: "2026",
     date: "2026-02-05",
-    description: "A fast, expressive self-portrait drawn in front of a mirror under single light source conditions. Strong contrast and visible strokes.",
+    description: "A quick sketch of a hare drawn in a personal sketchbook. Focus was placed on capturing the alert posture and soft textures of fur using loose charcoal lines.",
     image_url: "https://images.unsplash.com/photo-1452857297128-d9c29adba80b?auto=format&fit=crop&q=80&w=800",
     featured: false,
     created_at: "2026-02-05T18:00:00Z"
