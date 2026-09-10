@@ -477,19 +477,16 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   padding-left: 0.5rem;
 }
 
-.hero-image-col {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 
-.hero-image-frame {
+
+/* .hero-image-frame {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: var(--transition-smooth);
+  position: relative;
 }
 
 .hero-image-frame img {
@@ -497,14 +494,88 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   max-height: 68vh;
   height: auto;
   object-fit: contain;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  transition: var(--transition-smooth);
   display: block;
+  box-shadow: none;
+  transition: var(--transition-smooth);
+}
+
+.hero-image-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse 48% 62% at center,
+    transparent 48%,
+    rgba(34, 28, 25, 0.15) 62%,
+    rgba(34, 28, 25, 0.65) 78%,
+    var(--color-dark-bg) 100%
+  );
 }
 
 .hero-image-frame:hover img {
   transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+} */
+
+.hero-image-col {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image-frame {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  /* Move the entire artwork + fade together */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-image-frame img {
+  max-width: 100%;
+  max-height: 68vh;
+  height: auto;
+  object-fit: contain;
+  display: block;
+
+  /* No box or shadow */
+  box-shadow: none;
+}
+
+/* Soft fade into the dark background */
+.hero-image-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--color-dark-bg) 0%,
+      transparent 9%,
+      transparent 91%,
+      var(--color-dark-bg) 100%
+    ),
+    linear-gradient(
+      to right,
+      var(--color-dark-bg) 0%,
+      transparent 9%,
+      transparent 91%,
+      var(--color-dark-bg) 100%
+    );
+}
+
+/* Hover the entire composition */
+.hero-image-frame:hover {
+  transform: translateY(-4px);
 }
 
 .hero-scroll-indicator {
