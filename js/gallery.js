@@ -83,54 +83,84 @@ export function getArchiveNumber(art, allList) {
 /**
  * Render the Hero Section with the Featured Artwork
  */
-function renderHero() {
-  const featured = allArtworks.find(art => art.featured) || allArtworks[0];
-  const heroSection = document.getElementById('heroSection');
+// function renderHero() {
+//   const featured = allArtworks.find(art => art.featured) || allArtworks[0];
+//   const heroSection = document.getElementById('heroSection');
   
-  if (!featured) {
+//   if (!featured) {
+//     if (heroSection) heroSection.style.display = 'none';
+//     return;
+//   }
+
+//   if (heroSection) heroSection.style.display = '';
+
+//   const heroArchiveNum = document.getElementById('heroArchiveNum');
+//   const heroMedium = document.getElementById('heroMedium');
+//   const heroYear = document.getElementById('heroYear');
+//   const heroDate = document.getElementById('heroDate');
+//   const btnHeroDetail = document.getElementById('btnHeroDetail');
+
+//   if (heroArchiveNum) heroArchiveNum.textContent = getArchiveNumber(featured, allArtworks);
+//   if (heroMedium) heroMedium.textContent = featured.medium.toUpperCase();
+//   if (heroYear) heroYear.textContent = featured.year;
+
+//   // Format date (e.g. JULY 2026)
+//   if (heroDate) {
+//     const dateObj = new Date(featured.date);
+//     const formattedDate = dateObj.toLocaleDateString('en-US', {
+//       month: 'long',
+//       year: 'numeric',
+//       timeZone: 'UTC'
+//     }).toUpperCase();
+//     heroDate.textContent = formattedDate;
+//   }
+
+//   heroTitle.textContent = featured.title;
+  
+//   heroImageFrame.innerHTML = `
+//     <img src="${featured.image_url}" alt="${featured.title}" style="opacity: 0; transition: opacity 0.8s ease;" onload="this.style.opacity=1;">
+//   `;
+  
+//   // Clicking the hero image or the explore button opens its details
+//   heroImageFrame.onclick = () => {
+//     openDetail(featured.id);
+//   };
+
+//   if (btnHeroDetail) {
+//     btnHeroDetail.onclick = () => {
+//       openDetail(featured.id);
+//     };
+//   }
+// }
+
+function renderHero() {
+  const heroSection = document.getElementById('heroSection');
+  const heroDeck = document.getElementById('heroDeck');
+
+  if (!allArtworks.length) {
     if (heroSection) heroSection.style.display = 'none';
     return;
   }
 
   if (heroSection) heroSection.style.display = '';
 
-  const heroArchiveNum = document.getElementById('heroArchiveNum');
-  const heroMedium = document.getElementById('heroMedium');
-  const heroYear = document.getElementById('heroYear');
-  const heroDate = document.getElementById('heroDate');
-  const btnHeroDetail = document.getElementById('btnHeroDetail');
+  // Take up to 5 pieces — featured first, then most recent
+  const featured = allArtworks.find(art => art.featured);
+  const rest = allArtworks.filter(art => art.id !== featured?.id);
+  const deckPieces = [featured, ...rest].filter(Boolean).slice(0, 5);
 
-  if (heroArchiveNum) heroArchiveNum.textContent = getArchiveNumber(featured, allArtworks);
-  if (heroMedium) heroMedium.textContent = featured.medium.toUpperCase();
-  if (heroYear) heroYear.textContent = featured.year;
+  heroDeck.innerHTML = deckPieces.map((art, i) => `
+    <div class="hero-deck-card" style="--i: ${i};" data-id="${art.id}">
+      <img src="${art.image_url}" alt="${art.title}" loading="lazy">
+    </div>
+  `).join('');
 
-  // Format date (e.g. JULY 2026)
-  if (heroDate) {
-    const dateObj = new Date(featured.date);
-    const formattedDate = dateObj.toLocaleDateString('en-US', {
-      month: 'long',
-      year: 'numeric',
-      timeZone: 'UTC'
-    }).toUpperCase();
-    heroDate.textContent = formattedDate;
-  }
-
-  heroTitle.textContent = featured.title;
-  
-  heroImageFrame.innerHTML = `
-    <img src="${featured.image_url}" alt="${featured.title}" style="opacity: 0; transition: opacity 0.8s ease;" onload="this.style.opacity=1;">
-  `;
-  
-  // Clicking the hero image or the explore button opens its details
-  heroImageFrame.onclick = () => {
-    openDetail(featured.id);
-  };
-
-  if (btnHeroDetail) {
-    btnHeroDetail.onclick = () => {
-      openDetail(featured.id);
-    };
-  }
+  // Clicking any card opens that artwork's detail view
+  heroDeck.querySelectorAll('.hero-deck-card').forEach(card => {
+    card.addEventListener('click', () => {
+      openDetail(card.dataset.id);
+    });
+  });
 }
 
 /**

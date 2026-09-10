@@ -62,28 +62,36 @@
     <!-- VIEW: COLLECTION (Default / Homepage) -->
     <section id="view-collection" class="view-section active">
 
-      <!-- HERO: Featured Artwork (Concept B Layout) -->
+      <!-- HERO: Welcome + Card Deck -->
       <div id="heroSection" class="hero-view">
         <div class="container hero-layout-container">
           <div class="hero-split-body">
+
             <div class="hero-text-col">
-              <div class="hero-archive-tag">ARCHIVE</div>
-              <div id="heroArchiveNum" class="hero-archive-number">021</div>
+              <div class="hero-archive-tag">WELCOME</div>
               <hr class="hero-divider">
-              <div id="heroDate" class="hero-date">JULY 2026</div>
-              <h1 id="heroTitle" class="hero-title">Hand Study</h1>
-              <div class="hero-meta-details">
-                <div id="heroMedium" class="hero-medium">GRAPHITE ON PAPER</div>
-                <div id="heroYear" class="hero-year">2026</div>
-              </div>
-              <a href="javascript:void(0)" id="btnHeroDetail" class="btn-hero-explore">VIEW DETAILS &rarr;</a>
+              <h1 class="hero-title">Hi, I'm Chinmay</h1>
+              <p class="hero-welcome-text">
+                This is my personal sketchbook — a growing collection of drawings, paintings, and studies. Scroll
+                down to explore the collection.
+              </p>
             </div>
 
             <div class="hero-image-col">
-              <div class="hero-image-frame" id="heroImageFrame">
-                <!-- Rendered Dynamically -->
+              <div class="hero-deck" id="heroDeck">
+                <!-- Cards rendered dynamically by gallery.js — nothing else goes in here -->
+              </div>
+              <div class="hero-deck-hint">
+                <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+                  <path d="M35 25 C27 25, 17 21, 9 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none" />
+                
+                  <path d="M4 11 L9 8 L11 13" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"
+                    fill="none" />
+                </svg>
+                <span>Hover to explore</span>
               </div>
             </div>
+
           </div>
 
           <div class="hero-scroll-indicator">

@@ -359,6 +359,7 @@ body[data-active-view="about"] .mobile-nav-toggle span {
 }
 
 /* 7. HERO / FEATURED ARTWORK SECTION (Concept B Dark Charcoal/Brown) */
+/* 7. HERO / WELCOME SECTION (Concept B Dark Charcoal/Brown) */
 .hero-view {
   background-color: var(--color-dark-bg);
   color: var(--color-dark-text-main);
@@ -401,30 +402,11 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   text-transform: uppercase;
 }
 
-.hero-archive-number {
-  font-family: var(--font-serif);
-  font-size: 6rem;
-  font-weight: 300;
-  color: var(--color-dark-text-main);
-  line-height: 1;
-  margin: 0.5rem 0;
-}
-
 .hero-divider {
   width: 100%;
   border: 0;
   border-top: 1px solid var(--color-dark-border);
   margin: 1.5rem 0;
-}
-
-.hero-date {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--color-dark-text-muted);
-  text-transform: uppercase;
-  margin-bottom: 0.75rem;
 }
 
 .hero-title {
@@ -437,189 +419,293 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   letter-spacing: -0.01em;
 }
 
-.hero-meta-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 2.5rem;
-}
-
-.hero-medium {
+.hero-welcome-text {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.7;
   color: var(--color-dark-text-muted);
-  text-transform: uppercase;
+  max-width: 38ch;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
-.hero-dimensions {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  color: var(--color-dark-text-muted);
-}
-
-.btn-hero-explore {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--color-dark-text-main);
-  border-bottom: 1px solid var(--color-dark-text-main);
-  padding-bottom: 0.35rem;
-  text-transform: uppercase;
-  transition: var(--transition-fast);
-}
-
-.btn-hero-explore:hover {
-  color: var(--color-dark-text-muted);
-  border-color: var(--color-dark-text-muted);
-  padding-left: 0.5rem;
-}
-
-
-
-/* .hero-image-frame {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: var(--transition-smooth);
-  position: relative;
-}
-
-.hero-image-frame img {
-  max-width: 100%;
-  max-height: 68vh;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  box-shadow: none;
-  transition: var(--transition-smooth);
-}
-
-.hero-image-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-
-  background: radial-gradient(
-    ellipse 48% 62% at center,
-    transparent 48%,
-    rgba(34, 28, 25, 0.15) 62%,
-    rgba(34, 28, 25, 0.65) 78%,
-    var(--color-dark-bg) 100%
-  );
-}
-
-.hero-image-frame:hover img {
-  transform: translateY(-4px);
-} */
+/* =========================================================
+   HERO ARTWORK DECK
+   ========================================================= */
 
 .hero-image-col {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.hero-image-frame {
+/* The invisible stage that holds the entire deck */
+.hero-deck {
   position: relative;
-  width: fit-content;
-  max-width: 100%;
+
+  /*
+   * Large enough for the expanded fan,
+   * but still contained inside the hero's right column.
+   */
+  width: 560px;
+  height: 460px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 
-  /* Move the entire artwork + fade together */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  perspective: 1200px;
 }
 
-.hero-image-frame img {
-  max-width: 100%;
-  max-height: 68vh;
-  height: auto;
+/* ---------------------------------------------------------
+   Individual artwork cards
+   --------------------------------------------------------- */
+
+.hero-deck-card {
+  position: absolute;
+
+  width: 250px;
+  height: 350px;
+
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  border-radius: 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transform-origin: 50% 85%;
+
+  z-index: calc(20 - var(--i));
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease;
+}
+/* Artwork inside the card */
+
+.hero-deck-card img {
+  width: 100%;
+  height: 100%;
+
   object-fit: contain;
   display: block;
 
-  /* No box or shadow */
-  box-shadow: none;
+  border-radius: 2px;
+
+  filter: none;
+
+  transition: filter 0.5s ease;
 }
 
-/* Soft fade into the dark background */
-.hero-image-frame::after {
-  content: "";
+
+/* =========================================================
+   RESTING STATE
+   ========================================================= */
+
+/*
+ * Each card is only slightly offset.
+ *
+ * This creates the feeling of:
+ *
+ *       ┌─────┐
+ *       │     │
+ *       │     │
+ *       └─────┘
+ *
+ * rather than an already-open fan.
+ */
+
+.hero-deck-card:nth-child(1) {
+  transform:
+    translate3d(0, 0, 0)
+    rotate(-1deg);
+}
+
+.hero-deck-card:nth-child(2) {
+  transform:
+    translate3d(3px, 2px, 0)
+    rotate(0.5deg);
+}
+
+.hero-deck-card:nth-child(3) {
+  transform:
+    translate3d(6px, 4px, 0)
+    rotate(1.5deg);
+}
+
+.hero-deck-card:nth-child(4) {
+  transform:
+    translate3d(9px, 6px, 0)
+    rotate(2.5deg);
+}
+
+.hero-deck-card:nth-child(5) {
+  transform:
+    translate3d(12px, 8px, 0)
+    rotate(3.5deg);
+}
+
+.hero-deck-card:nth-child(6) {
+  transform:
+    translate3d(15px, 10px, 0)
+    rotate(4.5deg);
+}
+
+
+/* =========================================================
+   HOVER — OPEN THE DECK
+   ========================================================= */
+
+/*
+ * The important part.
+ *
+ * Cards don't simply move farther to the right.
+ * They follow a shallow CURVE.
+ *
+ * Think:
+ *
+ *             CARD 5
+ *          CARD 4
+ *       CARD 3
+ *    CARD 2
+ *  [CARD 1]
+ *
+ * The front card remains almost stationary.
+ */
+
+.hero-deck:hover .hero-deck-card:nth-child(1) {
+  transform:
+    translate3d(0, 0, 0)
+    rotate(-1deg);
+
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.16);
+}
+
+.hero-deck:hover .hero-deck-card:nth-child(2) {
+  transform:
+    translate3d(60px, -10px, 0)
+    rotate(4deg);
+
+  box-shadow:
+    0 17px 34px rgba(0, 0, 0, 0.16);
+}
+
+.hero-deck:hover .hero-deck-card:nth-child(3) {
+  transform:
+    translate3d(115px, -17px, 0)
+    rotate(8deg);
+
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.17);
+}
+
+.hero-deck:hover .hero-deck-card:nth-child(4) {
+  transform:
+    translate3d(165px, -14px, 0)
+    rotate(12deg);
+
+  box-shadow:
+    0 19px 38px rgba(0, 0, 0, 0.18);
+}
+
+.hero-deck:hover .hero-deck-card:nth-child(5) {
+  transform:
+    translate3d(210px, -2px, 0)
+    rotate(16deg);
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.hero-deck:hover .hero-deck-card:nth-child(6) {
+  transform:
+    translate3d(250px, 12px, 0)
+    rotate(20deg);
+
+  box-shadow:
+    0 21px 42px rgba(0, 0, 0, 0.19);
+}
+
+/* =========================================================
+   INDIVIDUAL CARD HOVER
+   ========================================================= */
+
+/*
+ * Do NOT scale the card.
+ *
+ * Scaling was one of the things making the previous version
+ * feel chaotic.
+ *
+ * Just bring the hovered card slightly forward.
+ */
+
+.hero-deck:hover .hero-deck-card:hover {
+  z-index: 50;
+
+  filter: brightness(1.03);
+
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+   HOVER HINT
+   ========================================================= */
+
+.hero-deck-hint {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
 
-  background:
-    linear-gradient(
-      to bottom,
-      var(--color-dark-bg) 0%,
-      transparent 9%,
-      transparent 91%,
-      var(--color-dark-bg) 100%
-    ),
-    linear-gradient(
-      to right,
-      var(--color-dark-bg) 0%,
-      transparent 9%,
-      transparent 91%,
-      var(--color-dark-bg) 100%
-    );
-}
+  /*
+   * Keep it underneath the deck instead of
+   * letting it interfere with the cards.
+   */
+  bottom: -1.5rem;
+  right: 2rem;
 
-/* Hover the entire composition */
-.hero-image-frame:hover {
-  transform: translateY(-4px);
-}
-
-.hero-scroll-indicator {
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 2rem;
+
   color: var(--color-dark-text-muted);
+
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+
+  opacity: 0.55;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s ease;
 }
 
-.scroll-arrow {
-  font-size: 1.25rem;
-  animation: bounce 2s infinite;
+.hero-deck:hover + .hero-deck-hint {
+  opacity: 0.2;
+  transform: translateX(8px);
 }
 
-.scroll-text {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-}
 
-@keyframes bounce {
-
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateY(-6px);
-  }
-
-  60% {
-    transform: translateY(-3px);
-  }
-}
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
 
 @media (max-width: 900px) {
+
   .hero-view {
     min-height: auto;
     padding-top: 6.5rem;
@@ -637,8 +723,85 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   .hero-title {
     font-size: 2.5rem;
   }
+
+  .hero-welcome-text {
+    max-width: 100%;
+  }
+
+  .hero-image-col {
+    overflow: hidden;
+  }
+
+  .hero-deck {
+    width: 100%;
+    max-width: 560px;
+    height: 380px;
+  }
+
+  .hero-deck-card {
+    width: 200px;
+    height: 280px;
+  }
+
+  /*
+   * Smaller fan on tablets.
+   */
+  .hero-deck:hover .hero-deck-card:nth-child(2) {
+    transform:
+      translate3d(52px, -8px, 0)
+      rotate(4deg);
+  }
+
+  .hero-deck:hover .hero-deck-card:nth-child(3) {
+    transform:
+      translate3d(98px, -14px, 0)
+      rotate(8deg);
+  }
+
+  .hero-deck:hover .hero-deck-card:nth-child(4) {
+    transform:
+      translate3d(140px, -10px, 0)
+      rotate(12deg);
+  }
+
+  .hero-deck:hover .hero-deck-card:nth-child(5) {
+    transform:
+      translate3d(178px, 0, 0)
+      rotate(16deg);
+  }
+
+  .hero-deck:hover .hero-deck-card:nth-child(6) {
+    transform:
+      translate3d(210px, 12px, 0)
+      rotate(20deg);
+  }
 }
 
+
+/* =========================================================
+   TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+  /*
+   * Don't leave the deck permanently exploded
+   * on phones/tablets where there is no hover.
+   */
+  .hero-deck-card {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg) !important;
+  }
+
+  .hero-deck {
+    height: 340px;
+  }
+
+  .hero-deck-hint {
+    display: none;
+  }
+}
 /* 8. COLLECTION / GALLERY SECTION */
 .gallery-container-block {
   padding-top: 6rem;
