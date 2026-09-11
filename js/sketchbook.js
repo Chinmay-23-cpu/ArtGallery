@@ -55,13 +55,13 @@ export async function initSketchbook() {
   ];
 
   // 3. Render sticky chronology sidebar nav & right-hand timeline listings
-  sortedYears.forEach(year => {
+  sortedYears.forEach((year) => {
     // Generate Left Sidebar Year/Month links
-    const yearNavGroup = document.createElement('div');
-    yearNavGroup.className = 'chronology-year-group-nav';
+    const yearNavGroup = document.createElement("div");
+    yearNavGroup.className = "chronology-year-group-nav";
 
-    const yearLabel = document.createElement('div');
-    yearLabel.className = 'chronology-year';
+    const yearLabel = document.createElement("div");
+    yearLabel.className = "chronology-year";
     yearLabel.textContent = year;
     yearNavGroup.appendChild(yearLabel);
 
@@ -70,9 +70,9 @@ export async function initSketchbook() {
       return monthNames.indexOf(b) - monthNames.indexOf(a);
     });
 
-    sortedMonths.forEach(month => {
-      const monthLink = document.createElement('a');
-      monthLink.className = 'chronology-month-link';
+    sortedMonths.forEach((month) => {
+      const monthLink = document.createElement("a");
+      monthLink.className = "chronology-month-link";
       monthLink.href = `#month-${year}-${month}`;
       monthLink.textContent = month.toUpperCase(); // Full month name, e.g. "AUGUST", "JULY"
       yearNavGroup.appendChild(monthLink);
@@ -83,30 +83,36 @@ export async function initSketchbook() {
     }
 
     // Generate Right timeline stream grouping by year
-    const yearSection = document.createElement('div');
-    yearSection.className = 'timeline-year-section';
+    const yearSection = document.createElement("div");
+    yearSection.className = "timeline-year-section";
 
-    sortedMonths.forEach(month => {
-      const monthSection = document.createElement('div');
-      monthSection.className = 'timeline-month-section';
+    // Visible year heading inside the timeline stream itself
+    const yearHeading = document.createElement("div");
+    yearHeading.className = "timeline-year-heading";
+    yearHeading.textContent = year;
+    yearSection.appendChild(yearHeading);
+
+    sortedMonths.forEach((month) => {
+      const monthSection = document.createElement("div");
+      monthSection.className = "timeline-month-section";
       monthSection.id = `month-${year}-${month}`;
 
-      const itemsContainer = document.createElement('div');
-      itemsContainer.className = 'timeline-items-v2';
+      const itemsContainer = document.createElement("div");
+      itemsContainer.className = "timeline-items-v2";
 
-      groupedData[year][month].forEach(art => {
-        const row = document.createElement('div');
-        row.className = 'timeline-row-v2';
-        
-        row.setAttribute('role', 'button');
-        row.setAttribute('aria-label', `View details for ${art.title}`);
+      groupedData[year][month].forEach((art) => {
+        const row = document.createElement("div");
+        row.className = "timeline-row-v2";
+
+        row.setAttribute("role", "button");
+        row.setAttribute("aria-label", `View details for ${art.title}`);
         row.onclick = () => openDetail(art.id);
 
         const dateObj = new Date(art.date);
-        const formattedDate = dateObj.toLocaleDateString('en-US', {
-          month: 'long',
-          year: 'numeric',
-          timeZone: 'UTC'
+        const formattedDate = dateObj.toLocaleDateString("en-US", {
+          month: "long",
+          year: "numeric",
+          timeZone: "UTC",
         });
 
         const archiveNum = `NO. ${getArchiveNumber(art, artworks)}`;
@@ -136,5 +142,5 @@ export async function initSketchbook() {
     if (timelineContainer) {
       timelineContainer.appendChild(yearSection);
     }
-  });
+ });
 }
