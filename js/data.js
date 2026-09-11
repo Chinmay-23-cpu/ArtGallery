@@ -56,7 +56,7 @@ export async function getArtworks() {
     try {
       const { data, error } = await supabase
         .from('artworks')
-        .select('*')
+        .select('id, title, description, image_url, featured, date, category, medium, year')
         .order('date', { ascending: false });
 
       if (error) throw error;
@@ -80,7 +80,7 @@ export async function getArtworkById(id) {
     try {
       const { data, error } = await supabase
         .from('artworks')
-        .select('*')
+        .select('id, title, description, image_url, featured, date, category, medium, year')
         .eq('id', id)
         .single();
 
@@ -102,33 +102,31 @@ export async function uploadImage(file) {
   if (!file) return null;
 
   if (isConfigured && supabase) {
-    try {
-      // Create a unique filename
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
-      const filePath = `uploads/${fileName}`;
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+    const filePath = `uploads/${fileName}`;
 
-      // Upload to bucket 'artworks'
-      const { data, error } = await supabase.storage
-        .from('artworks')
-        .upload(filePath, file);
+    const { error } = await supabase.storage
+      .from('artworks')
+      .upload(filePath, file, {
+        contentType: file.type,
+        cacheControl: '31536000',
+        upsert: false
+      });
 
-      if (error) throw error;
-
-      // Get public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from('artworks')
-        .getPublicUrl(filePath);
-
-      return publicUrl;
-    } catch (err) {
-      console.error("Image upload failed, falling back to Base64:", err);
-      return convertFileToBase64(file);
+    if (error) {
+      console.error("Image upload failed:", error);
+      throw error;
     }
-  } else {
-    // Convert to Base64 for offline/mock database storage
-    return convertFileToBase64(file);
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('artworks')
+      .getPublicUrl(filePath);
+
+    return publicUrl;
   }
+
+  return convertFileToBase64(file);
 }
 
 // Utility: convert file input into Base64 string for offline storage

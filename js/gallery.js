@@ -151,7 +151,7 @@ function renderHero() {
 
   heroDeck.innerHTML = deckPieces.map((art, i) => `
     <div class="hero-deck-card" style="--i: ${i};" data-id="${art.id}">
-      <img src="${art.image_url}" alt="${art.title}" loading="lazy">
+      <img src="${art.image_url}" alt="${art.title}">
     </div>
   `).join('');
 
