@@ -204,31 +204,59 @@ h4,
 }
 
 /* Body active-view responsive updates */
-body[data-active-view="collection"] .site-header {
+body[data-active-view="home"] .site-header {
   background-color: rgba(34, 28, 25, 0.85);
   border-color: var(--color-dark-border);
 }
 
-body[data-active-view="collection"] .logo {
+body[data-active-view="home"] .logo {
   color: var(--color-dark-text-main);
 }
 
-body[data-active-view="collection"] .nav-link {
+body[data-active-view="home"] .nav-link {
   color: var(--color-dark-text-muted);
+}
+
+body[data-active-view="home"] .nav-link.active,
+body[data-active-view="home"] .nav-link:hover {
+  color: var(--color-dark-text-main);
+}
+
+body[data-active-view="home"] .nav-link::after {
+  background-color: var(--color-dark-text-main);
+}
+
+body[data-active-view="home"] .mobile-nav-toggle span {
+  background-color: var(--color-dark-text-main);
+}
+
+
+body[data-active-view="collection"] .site-header {
+  background-color: rgba(244, 240, 232, 0.85);
+  border-color: var(--color-border);
+}
+
+body[data-active-view="collection"] .logo {
+  color: var(--color-text-main);
+}
+
+body[data-active-view="collection"] .nav-link {
+  color: var(--color-text-muted);
 }
 
 body[data-active-view="collection"] .nav-link.active,
 body[data-active-view="collection"] .nav-link:hover {
-  color: var(--color-dark-text-main);
+  color: var(--color-text-main);
 }
 
 body[data-active-view="collection"] .nav-link::after {
-  background-color: var(--color-dark-text-main);
+  background-color: var(--color-text-main);
 }
 
 body[data-active-view="collection"] .mobile-nav-toggle span {
-  background-color: var(--color-dark-text-main);
+  background-color: var(--color-text-main);
 }
+
 
 body[data-active-view="sketchbook"] .site-header {
   background-color: rgba(244, 240, 232, 0.85);
@@ -297,12 +325,14 @@ body[data-active-view="about"] .mobile-nav-toggle span {
     transition: background-color 0.4s ease;
   }
 
-  body[data-active-view="collection"] .main-nav,
-  body[data-active-view="about"] .main-nav {
-    background-color: var(--color-dark-bg);
-    border-color: var(--color-dark-border);
-  }
+    
+    body[data-active-view="about"] .main-nav,
+    body[data-active-view="home"] .main-nav {
+      background-color: var(--color-dark-bg);
+      border-color: var(--color-dark-border);
+    }
 
+  body[data-active-view="collection"] .main-nav,
   body[data-active-view="sketchbook"] .main-nav {
     background-color: var(--color-bg);
     border-color: var(--color-border);
@@ -358,7 +388,6 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   background-color: var(--color-dark-bg);
 }
 
-/* 7. HERO / FEATURED ARTWORK SECTION (Concept B Dark Charcoal/Brown) */
 /* 7. HERO / WELCOME SECTION (Concept B Dark Charcoal/Brown) */
 .hero-view {
   background-color: var(--color-dark-bg);
@@ -949,6 +978,28 @@ body[data-active-view="about"] .mobile-nav-toggle span {
     display: none;
   }
 }
+
+.btn-view-collection {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-dark-bg);
+  background-color: var(--color-dark-text-main);
+  padding: 0.9rem 2.2rem;
+  border: 1px solid var(--color-dark-text-main);
+  transition: var(--transition-fast);
+}
+
+.btn-view-collection:hover {
+  background-color: transparent;
+  color: var(--color-dark-text-main);
+}
+
 /* 8. COLLECTION / GALLERY SECTION */
 .gallery-container-block {
   padding-top: 6rem;
@@ -1009,9 +1060,9 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   color: var(--color-text-main);
 }
 
-.filter-btn.active::after {
+/* .filter-btn.active::after {
   width: 100%;
-}
+} */
 
 /* 5-column Editorial Grid Layout */
 .gallery-grid {

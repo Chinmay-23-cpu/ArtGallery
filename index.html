@@ -27,7 +27,7 @@
   <!-- 1. NAVIGATION HEADER -->
   <header class="site-header">
     <div class="container">
-      <a href="#/collection" class="logo">Chinmay's Sketchbook</a>
+      <a href="#/home" class="logo">Chinmay's Sketchbook</a>
 
       <button class="mobile-nav-toggle" aria-label="Toggle navigation menu" id="mobileNavToggle">
         <span></span>
@@ -36,7 +36,7 @@
       </button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="#/collection" class="nav-link active" data-view="collection">Collection</a>
+        <a href="#/collection" class="nav-link" data-view="collection">Collection</a>
         <a href="#/sketchbook" class="nav-link" data-view="sketchbook">Sketchbook</a>
         <a href="#/about" class="nav-link" data-view="about">About</a>
       </nav>
@@ -59,155 +59,152 @@
   <!-- 2. CONTENT VIEWS -->
   <main>
 
-    <!-- VIEW: COLLECTION (Default / Homepage) -->
-    <section id="view-collection" class="view-section active">
+  <!-- VIEW: HOME (Landing page — hero deck only) -->
+  <section id="view-home" class="view-section active">
 
-      <!-- HERO: Welcome + Card Deck -->
-      <div id="heroSection" class="hero-view">
-        <div class="container hero-layout-container">
-          <div class="hero-split-body">
+    <div id="heroSection" class="hero-view">
+      <div class="container hero-layout-container">
+        <div class="hero-split-body">
 
           <div class="hero-text-col">
-          
+
             <!-- Decorative oversized number -->
             <div class="hero-ghost-number">01</div>
-          
+
             <div class="hero-archive-tag">WELCOME</div>
-          
+
             <hr class="hero-divider">
-          
+
             <h1 class="hero-title">Hi, I'm Chinmay</h1>
-          
+
             <p class="hero-welcome-text">
-              This is my personal sketchbook — a growing collection
+              This is my personal sketchbook. A growing collection
               of drawings, paintings, and studies. Scroll down to
               explore the collection.
             </p>
-          
+
             <!-- Handwritten annotation -->
             <div class="hero-hand-note">
               <span>a collection</span>
               <span>of things I've made.</span>
             </div>
-          
+
             <!-- Archive information -->
             <div class="hero-archive-info">
               <div class="hero-archive-line"></div>
-          
+
               <div>
                 <span class="hero-archive-label">PERSONAL ARCHIVE</span>
                 <span class="hero-archive-years">2018 — 2026</span>
               </div>
             </div>
-          
+
             <div class="hero-category-line">
-              <span>—</span>
+              <span>|</span>
               DRAWINGS · PAINTINGS · STUDIES · EXPERIMENTS
             </div>
-          
+
           </div>
 
           <!-- Decorative curved line -->
           <div class="hero-gesture-line" aria-hidden="true">
             <svg viewBox="0 0 500 220" preserveAspectRatio="none">
-          
+
               <path d="M10 45
                    C110 45, 145 60, 210 115
                    C280 175, 355 185, 455 155" />
-          
+
               <path d="M440 145
                    L455 155
                    L441 168" />
-          
+
             </svg>
           </div>
 
-            <div class="hero-image-col">
-              <div class="hero-deck" id="heroDeck">
-                <!-- Cards rendered dynamically by gallery.js — nothing else goes in here -->
-              </div>
-              <div class="hero-deck-hint">
-                <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
-                  <path d="M35 25 C27 25, 17 21, 9 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none" />
-                
-                  <path d="M4 11 L9 8 L11 13" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"
-                    fill="none" />
-                </svg>
-                <span>Hover to explore</span>
-              </div>
+          <div class="hero-image-col">
+            <div class="hero-deck" id="heroDeck">
+              <!-- Cards rendered dynamically by gallery.js — nothing else goes in here -->
             </div>
+            <div class="hero-deck-hint">
+              <svg width="40" height="30" viewBox="0 0 40 30" fill="none">
+                <path d="M35 25 C27 25, 17 21, 9 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" fill="none" />
 
+                <path d="M4 11 L9 8 L11 13" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"
+                  fill="none" />
+              </svg>
+              <span>Hover to explore</span>
+            </div>
           </div>
 
-          <div class="hero-scroll-indicator">
-            <span class="scroll-arrow">&darr;</span>
-            <span class="scroll-text">SCROLL</span>
-          </div>
         </div>
+
+        <a href="#/collection" class="btn-view-collection">
+          VIEW COLLECTION
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- VIEW: COLLECTION (Gallery grid only) -->
+  <section id="view-collection" class="view-section">
+    <div class="container gallery-container-block" style="padding-top: 10rem;">
+      <div class="collection-header-row">
+        <h2 class="collection-title-v2">THE COLLECTION</h2>
+
+        <nav class="category-filters" aria-label="Filter collection by category">
+          <button class="filter-btn active" data-filter="all">ALL</button>
+          <button class="filter-btn" data-filter="pencil">DRAWING</button>
+          <button class="filter-btn" data-filter="painting">PAINTING</button>
+          <button class="filter-btn" data-filter="studies">STUDY</button>
+          <button class="filter-btn" data-filter="experiments">EXPERIMENT</button>
+        </nav>
       </div>
 
-      <!-- THE COLLECTION SECTION -->
-      <div class="container gallery-container-block">
-        <div class="collection-header-row">
-          <h2 class="collection-title-v2">THE COLLECTION</h2>
-
-          <!-- Categories Filters -->
-          <nav class="category-filters" aria-label="Filter collection by category">
-            <button class="filter-btn active" data-filter="all">ALL</button>
-            <button class="filter-btn" data-filter="pencil">DRAWING</button>
-            <button class="filter-btn" data-filter="painting">PAINTING</button>
-            <button class="filter-btn" data-filter="studies">STUDY</button>
-            <button class="filter-btn" data-filter="experiments">EXPERIMENT</button>
-          </nav>
-        </div>
-
-        <!-- Editorial Grid Layout -->
-        <div class="gallery-grid" id="galleryGrid" aria-live="polite">
-          <!-- Rendered Dynamically -->
-        </div>
+      <div class="gallery-grid" id="galleryGrid" aria-live="polite">
+        <!-- Rendered Dynamically -->
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- VIEW: SKETCHBOOK (Timeline) -->
-    <section id="view-sketchbook" class="view-section">
-      <div class="container sketchbook-layout-v2">
-        <!-- Sticky Left Chronology Column -->
-        <div class="sketchbook-sidebar">
-          <h2 class="sketchbook-title-v2">THE SKETCHBOOK</h2>
-          <div class="chronology-nav" id="chronologyNav">
-            <!-- Rendered Dynamically in sketchbook.js -->
-          </div>
-        </div>
-
-        <!-- Right Content Column -->
-        <div class="sketchbook-timeline-v2" id="sketchbookTimeline">
+  <!-- VIEW: SKETCHBOOK (Timeline) -->
+  <section id="view-sketchbook" class="view-section">
+    <div class="container sketchbook-layout-v2">
+      <div class="sketchbook-sidebar">
+        <h2 class="sketchbook-title-v2">THE SKETCHBOOK</h2>
+        <div class="chronology-nav" id="chronologyNav">
           <!-- Rendered Dynamically in sketchbook.js -->
         </div>
       </div>
-    </section>
 
-    <!-- VIEW: ABOUT -->
-    <section id="view-about" class="view-section">
-      <div class="container about-layout-v2">
-        <div class="about-statement-col">
-          <h2 class="about-quote-title">
-            I BUILD WITH CODE.<br>
-            I DRAW WITH GRAPHITE.<br>
-            SOMETIMES<br>
-            I DO BOTH.
-          </h2>
-          <div class="about-signature-v2">&mdash; A Random Guy</div>
-        </div>
-        <div class="about-image-col">
-          <div class="about-image-frame-v2">
-            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800"
-              alt="Studio workspace with drawing tools and sketchbooks.">
-          </div>
+      <div class="sketchbook-timeline-v2" id="sketchbookTimeline">
+        <!-- Rendered Dynamically in sketchbook.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW: ABOUT -->
+  <section id="view-about" class="view-section">
+    <div class="container about-layout-v2">
+      <div class="about-statement-col">
+        <h2 class="about-quote-title">
+          I BUILD WITH CODE.<br>
+          I DRAW WITH GRAPHITE.<br>
+          SOMETIMES<br>
+          I DO BOTH.
+        </h2>
+        <div class="about-signature-v2">&mdash; A Random Guy</div>
+      </div>
+      <div class="about-image-col">
+        <div class="about-image-frame-v2">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&q=80&w=800"
+            alt="Studio workspace with drawing tools and sketchbooks.">
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
+</main>
 
   <!-- site-footer -->
   <footer class="site-footer">
