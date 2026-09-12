@@ -1650,14 +1650,14 @@ body[data-active-view="about"] .mobile-nav-toggle span {
   width: 100%;
   height: auto;
   object-fit: cover;
-  filter: grayscale(1) brightness(0.85) contrast(1.1);
-  transition: filter var(--transition-smooth);
+  /* filter: grayscale(1) brightness(0.85) contrast(1.1); */
+  /* transition: filter var(--transition-smooth); */
   display: block;
 }
 
-.about-image-frame-v2:hover img {
+/* .about-image-frame-v2:hover img {
   filter: grayscale(0.2) brightness(0.9) contrast(1);
-}
+} */
 
 @media (max-width: 900px) {
   .about-layout-v2 {
